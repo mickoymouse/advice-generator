@@ -2,11 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
-  @apply bg-white dark:bg-gray-950;
+.gradient-shadow {
+	transition: box-shadow 0.3s ease;
+}
 
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
-  }
+.gradient-shadow::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: 50%;
+	background: radial-gradient(
+		circle,
+		hsla(150, 100%, 66%, 0.6) 30%,
+		hsla(150, 100%, 66%, 0) 100%
+	);
+	z-index: -1;
+	transition: background 0.3s ease;
+}
+
+.gradient-shadow:hover {
+	box-shadow: 0 0 20px 10px hsla(150, 100%, 66%, 0.6); /* Neon-green glow */
 }
