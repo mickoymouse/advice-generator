@@ -3,6 +3,7 @@ import { useLoaderData } from "@remix-run/react";
 import { useState } from "react";
 import { getAdvice } from "~/actions/advice";
 
+// meta data of the page
 export const meta: MetaFunction = () => {
 	return [
 		{ title: "Frontend Mentor | Advice generator app" },
@@ -13,13 +14,23 @@ export const meta: MetaFunction = () => {
 	];
 };
 
+// loader -> loads data on page mount
 export const loader = async () => {
-	const advice: Advice = await getAdvice();
-	return advice;
+	try {
+		const advice: Advice = await getAdvice();
+		return advice;
+	} catch (error) {
+		return {
+			id: 0,
+			advice: "n/a",
+		};
+	}
 };
 
 export default function Index() {
+	// get data from loader
 	const { id, advice } = useLoaderData<typeof loader>();
+	// state to store advice data
 	const [adviceData, setAdviceData] = useState<Advice>({ id, advice });
 
 	return (
@@ -43,11 +54,16 @@ export default function Index() {
 						/>
 						<img src="/pattern-divider-mobile.svg" alt="divider" />
 					</picture>
+					{/* on button click, fetch new advice */}
 					<button
 						className="select-none w-[64px] h-[64px] bg-neon-green rounded-full flex items-center justify-center absolute bottom-[-32px] gradient-shadow"
 						onClick={async () => {
-							const advice: Advice = await getAdvice();
-							setAdviceData(advice);
+							try {
+								const advice: Advice = await getAdvice();
+								setAdviceData(advice);
+							} catch {
+								setAdviceData({ id: 0, advice: "n/a" });
+							}
 						}}
 					>
 						<img src="/icon-dice.svg" alt="dice button icon" />
