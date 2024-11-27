@@ -25,13 +25,13 @@ Users should be able to:
 
 ### Screenshot
 
-![Desktop](./desktop-design.jpg)
-![Mobile](./mobile-design.jpg)
+![Desktop](./design/desktop-design.jpg)
+![Mobile](./design/mobile-design.jpg)
 
 ### Links
 
 - Solution URL: [Github Repo](https://github.com/mickoymouse/advice-generator)
-- Live Site URL: [Live Demo](https://your-live-site-url.com)
+- Live Site URL: [Live Demo](https://advice-generator-gilt-pi.vercel.app/)
 
 ## My process
 
