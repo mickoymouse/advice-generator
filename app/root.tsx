@@ -4,10 +4,12 @@ import {
 	Outlet,
 	Scripts,
 	ScrollRestoration,
+	useLoaderData,
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
 
 import "./tailwind.css";
+import { env } from "./utils/env.schema";
 
 export const links: LinksFunction = () => [
 	{ rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -22,7 +24,17 @@ export const links: LinksFunction = () => [
 	},
 ];
 
+export const loader = async () => {
+	return {
+		ENV: {
+			API_URL: env().API_URL,
+		},
+	};
+};
+
 export function Layout({ children }: { children: React.ReactNode }) {
+	const data = useLoaderData<typeof loader>();
+
 	return (
 		<html lang="en">
 			<head>
@@ -34,6 +46,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
 			<body>
 				{children}
 				<ScrollRestoration />
+				<script
+					dangerouslySetInnerHTML={{
+						__html: `window.ENV = ${JSON.stringify(data.ENV)}`,
+					}}
+				/>
 				<Scripts />
 			</body>
 		</html>

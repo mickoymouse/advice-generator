@@ -1,6 +1,10 @@
+import { getApiUrl } from "~/utils/helper";
+
 export const getAdvice = async (): Promise<Advice> => {
 	try {
-		const response = await fetch(process.env.API_URL + "");
+		const apiUrl: string = getApiUrl();
+
+		const response = await fetch(apiUrl);
 		const data: AdviceResponse = await response.json();
 
 		return {
