@@ -44,7 +44,7 @@ export default function Index() {
 					<h1 className="text-[11px] font-semibold text-neon-green tracking-[3.46px] uppercase md:text-[13px]">
 						Advice #{adviceData.id}
 					</h1>
-					<p className="text-center text-2xl font-semibold text-white tracking-[-0.26px] md:text-[28px]">
+					<p className="text-center text-2xl font-semibold text-light-cyan tracking-[-0.26px] md:text-[28px]">
 						"{adviceData.advice}"
 					</p>
 					<picture className="pb-6 select-none">
